@@ -7,11 +7,36 @@ class Solution:
     outputFolder = os.path.join("soluzioni", "output", "2")
 
     @staticmethod
-    def solve(input: str) -> int:
-        """
-        Scrivi la tua soluzione qui
-        """
-        pass
+    def solve(stringa: str) -> int:
+        con = ""
+        mul = 1
+        ris = 0
+        strlen = len(stringa)
+        for x in range(strlen-5):
+            if stringa[x] == 'c' and stringa[x+1] == 'o' and stringa[x+2] == 'n' and stringa[x+3] == '(' and stringa[x+4] != ")":
+                i = x+4
+                while stringa[i] != ')':
+                    con += stringa[i]
+                    i+=1
+                ris += int(con)
+                con = ""
+                x = i
+            elif stringa[x] == 's' and stringa[x+1] == 'u' and stringa[x+2] == 'm' and stringa[x+3] == '(' and stringa[x+4] != ")":
+                i = x+4
+                while stringa[i] != ')':
+                    ris += int(stringa[i])
+                    i+=1
+                x = i
+            elif stringa[x] == 'm' and stringa[x+1] == 'u' and stringa[x+2] == 'l' and stringa[x+3] == '(' and stringa[x+4] != ")":
+                i = x+4
+                while stringa[i] != ')':
+                    mul *= int(stringa[i])
+                    i+=1
+                ris += mul
+                mul = 1
+                x = i
+        return ris
+
 
     @staticmethod
     def loadInput(i: int) -> str:

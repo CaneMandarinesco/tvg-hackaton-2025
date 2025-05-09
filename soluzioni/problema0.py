@@ -9,9 +9,18 @@ class Solution:
     @staticmethod
     def solve(n: int, k: int) -> int:
         """
-        Scrivi la tua soluzione qui
+        n: univesita
+        k: benzinaio
         """
-        pass
+        benzina = 0
+        c = 1
+        for i in range(0, k):
+            c += 1
+
+        for i in range(0, n-k):
+            benzina += c
+            c += 1
+        return benzina
 
     @staticmethod
     def loadInput(i: int) -> str:

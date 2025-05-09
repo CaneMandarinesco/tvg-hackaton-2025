@@ -1,17 +1,35 @@
 import os
 
-
 class Solution:
 
     inputFolder = os.path.join("soluzioni", "input", "1")
     outputFolder = os.path.join("soluzioni", "output", "1")
+    exe = 0
 
     @staticmethod
     def solve(key: str, text: str) -> str:
         """
         Scrivi la tua soluzione qui
         """
-        pass
+        output = ""
+        i = 0
+        len_key = len(key)
+
+        for c in text:
+            if i == len_key:
+                i = 0
+            
+            val_key = ord(key[i])
+            val_text = ord(c)
+            if 97 <= val_text <= 122:
+                val_out = val_text + (val_key - 96)
+                if val_out > 122:
+                    val_out -= 26
+                output += chr(val_out)
+                i += 1
+            else:
+                output += c
+        return output
 
     @staticmethod
     def loadInput(i: int) -> str:

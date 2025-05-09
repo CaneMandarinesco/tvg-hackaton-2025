@@ -1,4 +1,5 @@
 import os
+import pdb
 
 
 class Solution:
@@ -8,10 +9,35 @@ class Solution:
 
     @staticmethod
     def solve(matrix: list[list[int]], squares: list[list[int, int, int, int]]) -> list[int]:
-        """
-        Scrivi la tua soluzione qui
-        """
-        pass
+        Y = len(matrix)
+        X = len(matrix[0])
+        M = []
+        for x in matrix:
+            M.append(x[:])
+
+        for y in range(Y):
+            s = 0 
+            for x in range(X):
+                s += matrix[y][x] 
+                M[y][x] = s
+
+        output = []
+        for s in squares:
+            y1, x1 = s[0], s[1]
+            y2, x2 = s[2], s[3]
+            somma = 0
+            for y in range(y1, y2+1):
+                # if y >= Y: break
+                x = 0
+                if x1-1 == -1:
+                    x = M[y][x2]
+                else:
+                    x = M[y][x2] - M[y][x1-1]
+                somma += x
+            output.append(somma)
+
+        return output
+
 
     @staticmethod
     def loadInput(i: int) -> tuple[list[list[int]], list[list[int, int, int, int]]]:
@@ -49,3 +75,8 @@ class Solution:
                 for i in range(len(list)):
                     list[i] = int(list[i])
         return list
+
+sol = Solution()
+x = sol.loadInput(0)
+r = sol.loadOutput(0)
+print(sol.solve(*x))

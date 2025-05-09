@@ -19,7 +19,7 @@ class Solution:
         x1, y1 = x, y
         while k > 0:
             if x1 < 0: return False
-            L.append(matrix[x1][y])
+            L.append(matrix[y][x1])
             x1 -= 1
             k -= 1
         return Solution.palindroma(L)
@@ -29,7 +29,7 @@ class Solution:
         x1, y1 = x, y
         while k > 0:
             if x1 < 0 or y1 < 0: return False
-            L.append(matrix[x1][y1])
+            L.append(matrix[y1][x1])
             x1 -= 1
             y1 -= 1
             k -= 1
@@ -40,7 +40,7 @@ class Solution:
         x1, y1 = x, y
         while k > 0:
             if y1 < 0: return False
-            L.append(matrix[x][y1])
+            L.append(matrix[y1][x])
             y1 -= 1
             k -= 1
         return Solution.palindroma(L)
@@ -50,7 +50,7 @@ class Solution:
         y1, x1 = y, x
         while k > 0:
             if x1 >= Solution.X or y1 < 0: return False
-            L.append(matrix[x1][y1])
+            L.append(matrix[y1][x1])
             x1 += 1
             y1 -= 1
             k -= 1
@@ -61,28 +61,20 @@ class Solution:
         """
         Scrivi la tua soluzione qui
         """
-        Solution.X = len(matrix)
-        Solution.Y = len(matrix[0])
+        Solution.Y = len(matrix)
+        Solution.X = len(matrix[0])
         n = 0
 
         for y in range(Solution.Y):    
             for x in range(Solution.X):
-                if matrix[x][y] == start:
+                if matrix[y][x] == start:
                     if (Solution.l(matrix, y, x, k, start)): 
-                        if k == 3:
-                            pass
                         n += 1
                     if(Solution.lu(matrix, y, x, k, start)):
-                        if k == 3:
-                            pass
                         n += 1
                     if(Solution.u(matrix, y, x, k, start)):
-                        if k == 3:
-                            pass
                         n += 1
                     if(Solution.ru(matrix, y, x, k, start)):
-                        if k == 3:
-                            pass
                         n += 1
         return n
                             
@@ -121,9 +113,3 @@ class Solution:
             for line in file:
                 value += line.strip()
         return int(value)
-
-
-sol = Solution()
-x = sol.loadInput(1)
-print(sol.solve(*x))
-
